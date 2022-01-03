@@ -1,33 +1,28 @@
+import sys
 from socket import socket, AF_INET, SOCK_STREAM
 from time import time
-import base64
+from cli_service_layer import *
 
-s = socket(AF_INET, SOCK_STREAM)
-s.connect(('localhost', 60000))
-
-presence_data = {
-    "action": "presence",
-    "time": str(time()),
-    "type": "status",
-    "user": {
-        "account_name": "C0deMaver1ck",
-        "status": "Yep, I am here!"
-    }
-}
+client_socket.connect((client_config.get('SERVER'), client_config.get('PORT')))
 
 
-def send_presence():
-    encoded_presence = str(presence_data).encode('utf-8')
-    base64_presence = base64.b64encode(encoded_presence)
-    s.send(base64_presence)
+def check_response(response):
+    if response.get('action') is None:
+        print(f'Response received...')
+        for value in response.values():
+            print(value)
+    else:
+        if response.get('action') == 'probe':
+            print(f'Probation request was received...\n {response}')
+            username = input('Enter desired username:')
+            client_socket.send(encode_data(presence_msg_create(username)))
 
 
-server_request = s.recv(10000000)
-decoded_request = eval(base64.b64decode(server_request))
-print(f'Request from the server was received {decoded_request}')
-requested_action = decoded_request.get('action')
+while True:
+    data_from_server = decode_data(client_socket.recv(client_config['BUFFER_SIZE']))
+    if len(data_from_server) == 0:
+        break
+    else:
+        check_response(data_from_server)
 
-if requested_action == 'probe':
-    send_presence()
 
-s.close()

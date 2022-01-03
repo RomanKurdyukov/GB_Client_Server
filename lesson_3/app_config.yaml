@@ -1,0 +1,23 @@
+SERVER: 'localhost'
+HOST: ''
+PORT: 8888
+MAX_MESSAGE_LENGHT: 640
+MAX_CONNECTIONS: 5
+ENCODING: 'utf-8'
+BUFFER_SIZE: 1024
+ACTION:
+  - probe
+  - authenticate
+  - quit
+  - presence
+  - msg
+  - join
+  - leave
+RESPONSE:
+  BASE_ALERT: 100
+  IMPORTANT_ALERT: 101
+  OK: 200
+  CREATED: 201
+  ACCEPTED: 202
+
+

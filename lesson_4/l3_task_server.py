@@ -21,7 +21,7 @@ try:
         client_data = decode_data(client.recv(server_config['BUFFER_SIZE']))
         if check_probation_data(client_data):
             print(client_data)
-            client.send(encode_data(response_ok_msg()))
+            client.send(response_ok_msg())
             print(f'Probation passed, ACK was sent...')
 except KeyboardInterrupt:
     print('\nServer was shut down manually!')

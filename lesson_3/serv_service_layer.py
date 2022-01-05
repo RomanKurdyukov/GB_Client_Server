@@ -13,8 +13,8 @@ with open('app_config.yaml', 'r') as config:
 
 def encode_data(data):
     encoded_answer = str(data).encode(server_config['ENCODING'])
-    encoded_base64_data = base64.b64encode(encoded_answer)
-    return encoded_base64_data
+    encoded_data = base64.b64encode(encoded_answer)
+    return encoded_data
 
 
 def decode_data(data):
@@ -27,7 +27,7 @@ def response_ok_msg():
         'response': server_config['RESPONSE']['OK'],
         'alert': 'OK'
     }
-    return response_set
+    return encode_data(response_set)
 
 
 def clients_probation():
@@ -35,11 +35,11 @@ def clients_probation():
         'action': server_config['ACTION'][0],
         'time': time()
     }
-    return probation_set
+    return encode_data(probation_set)
 
 
 def check_probation_data(data):
-    if len(data) <= server_config['MAX_MESSAGE_LENGHT'] \
+    if len(data) <= server_config['MAX_MESSAGE_LENGTH'] \
             and data.get('action') == server_config['ACTION'][3]:
         return True
 

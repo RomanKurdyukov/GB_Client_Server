@@ -15,7 +15,7 @@ def check_response(response):
         if response.get('action') == 'probe':
             print(f'Probation request was received...\n {response}')
             username = input('Enter desired username:')
-            client_socket.send(encode_data(presence_msg_create(username)))
+            client_socket.send(presence_msg_create(username))
 
 
 while True:

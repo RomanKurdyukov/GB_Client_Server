@@ -13,8 +13,8 @@ with open('app_config.yaml', 'r') as config:
 
 def encode_data(data):
     encoded_answer = str(data).encode(client_config['ENCODING'])
-    encoded_base64_data = base64.b64encode(encoded_answer)
-    return encoded_base64_data
+    encoded_data = base64.b64encode(encoded_answer)
+    return encoded_data
 
 
 def decode_data(data):
@@ -32,5 +32,5 @@ def presence_msg_create(username):
             "status": "Yep, I am here!"
         }
     }
-    return presence_data
+    return encode_data(presence_data)
 

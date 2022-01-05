@@ -13,15 +13,15 @@ try:
     while True:
         client, addr = server_socket.accept()
         print(f'Connection request from IP {addr[0]} PORT {addr[1]} accepted...')
-        client.send(encode_data(response_ok_msg()))
+        client.send(response_ok_msg())
         print(f'Connection ACK was sent...')
         sleep(1)
-        client.send(encode_data(clients_probation()))
+        client.send(clients_probation())
         print(f'Probe action was sent...')
         client_data = decode_data(client.recv(server_config['BUFFER_SIZE']))
         if check_probation_data(client_data):
             print(client_data)
-            client.send(encode_data(response_ok_msg()))
+            client.send(response_ok_msg())
             print(f'Probation passed, ACK was sent...')
 except KeyboardInterrupt:
     print('\nServer was shut down manually!')

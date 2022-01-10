@@ -1,0 +1,41 @@
+SERVER: 'localhost'
+HOST: ''
+PORT: 8888
+MAX_MESSAGE_LENGTH: 640
+MAX_CONNECTIONS: 5
+ENCODING: 'utf-8'
+BUFFER_SIZE: 1024
+ACTION:
+  - probe
+  - authenticate
+  - quit
+  - presence
+  - msg
+  - join
+  - leave
+RESPONSE:
+  BASE_ALERT: 100
+  # базовое уведомление
+  IMPORTANT_ALERT: 101
+  # важное уведомление
+  OK: 200
+  CREATED: 201
+  ACCEPTED: 202
+  BAD_REQUEST: 400
+  # неправильный запрос/JSON-объект
+  NOT_AUTHORIZED: 401
+  # не авторизован
+  WRONG_LOGIN_PASSWORD: 402
+  # неправильный логин/пароль
+  FORBIDDEN: 403
+  # пользователь заблокирован
+  NOT_FOUND: 404
+  # пользователь/чат отсутствует на сервере
+  CONFLICT: 409
+  # уже имеется подключение с указанным логином
+  GONE: 410
+  # адресат существует, но недоступен (offline)
+  SERVER_ERROR: 500
+  # ошибка сервера
+  # Коды ошибок могут быть дополнены новыми.
+

@@ -1,9 +1,11 @@
 from cli_service_layer import *
 from log.client_log_config import client_log
+from deco_utils import func_cli_logging
 
 client_socket.connect((client_config.get('SERVER'), client_config.get('PORT')))
 
 try:
+    @func_cli_logging
     def check_response(response):
         if response.get('action') is None:
             client_log.info(f'Response received...')
